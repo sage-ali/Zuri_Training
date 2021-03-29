@@ -1,0 +1,17 @@
+Using the the content on this post:
+
+https://i4g.zuriboard.com/post/11
+
+Write simple "Hello World" code using python, take a single screenshot showing your code and the output, and submit.
+
+If you show only the code without output, you'll get 1
+
+If you show only the output without code, you get 1
+
+If you show nothing, you get 0
+
+If you show both the code and output, you get 2
+
+ 
+
+Good Luck!
