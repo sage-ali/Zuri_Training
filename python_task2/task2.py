@@ -1,3 +1,10 @@
+import datetime # Module for getting date
+
+# Getting and printing date and time  
+e = datetime.datetime.now()
+print ("Today's date:  = %s/%s/%s" % (e.day, e.month, e.year))
+print ("The time is now: = %s:%s" % (e.hour, e.minute))
+
 allowed_Users = ['Seyi', 'Mike', 'John']
 allowed_Password = ['PasswordSeyi', 'passwordMike', 'passwordJohn']
 
