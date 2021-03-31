@@ -6,10 +6,10 @@ print ("Today's date:  = %s/%s/%s" % (e.day, e.month, e.year))
 print ("The time is now: = %s:%s" % (e.hour, e.minute))
 
 allowed_Users = ['Seyi', 'Mike', 'John']
-allowed_Password = ['PasswordSeyi', 'passwordMike', 'passwordJohn']
+allowed_Password = ['passwordSeyi', 'passwordMike', 'passwordJohn']
 account_balances = [15000,15000,15000]
 
-name = input('what is your name? \n')
+name = input('What is your name? \n')
 
 if(name in allowed_Users):
     userID = allowed_Users.index(name)
@@ -43,7 +43,7 @@ if(name in allowed_Users):
             print('Thank you for contacting us')
             
         else:
-            print(f'invalid option selected')
+            print(f'Invalid option selected')
     else:
         print('Password is incorrect, please try again')
 
