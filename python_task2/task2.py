@@ -7,6 +7,7 @@ print ("The time is now: = %s:%s" % (e.hour, e.minute))
 
 allowed_Users = ['Seyi', 'Mike', 'John']
 allowed_Password = ['PasswordSeyi', 'passwordMike', 'passwordJohn']
+account_balances = [15000,15000,15000]
 
 name = input('what is your name? \n')
 
@@ -24,11 +25,23 @@ if(name in allowed_Users):
         
         selected_Option = int(input('Please select an option \n'))
         if (selected_Option == 1):
-            print(f'you selected Withdrawal')
-        elif (selected_Option == 1):
-            print(f'you selected Cash Deposit')
-        elif (selected_Option == 1):
-            print(f'you selected Complaints')
+            
+            withdraw_amount = float(input('How much will you like to withdraw \n'))
+            if withdraw_amount <= account_balances[userID]:
+                print('Take your cash')
+                account_balances[userID] = account_balances[userID] - withdraw_amount
+            else:
+                print('Insufficient funds')   
+            
+        elif (selected_Option == 2):
+            deposit_amount = float(input('How much will you like to deposit \n'))
+            account_balances[userID] = account_balances[userID] + deposit_amount
+            print(f'Your new account balance is {account_balances[userID]}')
+            
+        elif (selected_Option == 3):
+            complaint = input('What will you like to report\n')
+            print('Thank you for contacting us')
+            
         else:
             print(f'invalid option selected')
     else:
