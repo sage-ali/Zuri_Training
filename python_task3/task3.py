@@ -1,5 +1,6 @@
 import datetime # Module for getting date
 import re
+import random
 
 # Getting and printing date and time  
 e = datetime.datetime.now()
@@ -27,7 +28,10 @@ def validate_userdetails(name, email, password):
     else:
         print("Enter valid details")
         register()
-    pass
+        
+def generate_account_number():
+    return random.randrange(1111111111,9999999999)
+
   
 # def login():
 #     # name = input("What is your name? \n")
@@ -35,6 +39,7 @@ def validate_userdetails(name, email, password):
 #     # bank_operation()
 #     pass
   
+
 def register():
     #checking if new user or existing user
     name = input("What is your fullname? \n")
@@ -42,8 +47,18 @@ def register():
     password = input("Your password? \n")
     validate_userdetails(name, email, password)
     
-    #logic to update db
+    accountNumber = generate_account_number()
     
+    user_details = {
+    str(accountNumber) : {
+        "name": name,
+        "email": email,
+        "password": password
+    }
+    #logic to check and update db
+    
+    
+    }
     #login()
     
 
@@ -67,8 +82,6 @@ while True:
 
 
 
-# def generate_account_number():
-#     pass
 
 # def bank_operation():
 #     pass
