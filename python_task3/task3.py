@@ -1,6 +1,11 @@
 import datetime # Module for getting date
 import re
 import random
+import json
+import os
+
+script_dir = os.path.dirname(__file__)
+db_path = os.path.join(script_dir, 'accountDB.json')
 
 # Getting and printing date and time  
 e = datetime.datetime.now()
@@ -29,6 +34,7 @@ def validate_userdetails(name, email, password):
         print("Enter valid details")
         register()
         
+        
 def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
@@ -55,10 +61,18 @@ def register():
         "email": email,
         "password": password
     }
+    }
     #logic to check and update db
     
+    with open(db_path) as fi:
+        user_datas = json.load(fi)
+        user_datas.append(user_details)
+        
+    with open(db_path, mode='w') as f:
+        f.write(json.dumps(user_datas, indent=4))
+        
     
-    }
+    
     #login()
     
 
