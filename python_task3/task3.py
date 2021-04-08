@@ -155,6 +155,8 @@ while True:
     elif logout == 2:
         print("Thank you for banking with us, do have a nice day")
         break
+    else:
+        print("Enter a valid number")
 
 
 
