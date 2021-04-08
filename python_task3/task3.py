@@ -94,6 +94,7 @@ def bank_operation(user):
 
 def login():
     while True:   
+        print(f"Logging in...")
         account_number = input("What is your account number? \n")
         password = input("Your password? \n")
         if  auth(account_number, password):
@@ -148,7 +149,7 @@ while True:
         print("Select a valid option\n")
         
 while True:
-    logout = input('will you like to perform another transaction. 1 for Yes, 2 for No\n')
+    logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
     if logout == 1:
         login()     
     elif logout == 2:
