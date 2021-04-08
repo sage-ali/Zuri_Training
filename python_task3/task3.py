@@ -12,13 +12,7 @@ e = datetime.datetime.now()
 print ("Today's date:  = %s/%s/%s" % (e.day, e.month, e.year))
 print ("The time is now: = %s:%s" % (e.hour, e.minute))
 
-allowed_Users = ['Seyi', 'Mike', 'John']
-allowed_Password = ['passwordSeyi', 'passwordMike', 'passwordJohn']
-account_balances = [15000,15000,15000]
-
-# 2. Include register, and login
-
-# 3. Generate Account Number
+current_user = {}
 
 # 4. Any other improvement you can think of (extra point)
 
@@ -43,8 +37,12 @@ def auth(account_number, password):
         user_datas = json.load(fi)
         for user in user_datas:
             if user.get(account_number, False) and user[account_number]['password'] == password:
+                current_user.update(user)
                 return True
     return False
+
+# def bank_operation():
+#     pass
 
 def login():
     while True:   
@@ -105,9 +103,6 @@ while True:
 
 
 
-
-# def bank_operation():
-#     pass
 
 # def withdraw():
 #     pass
