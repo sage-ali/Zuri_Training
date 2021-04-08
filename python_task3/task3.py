@@ -19,15 +19,15 @@ current_user_index = 0
 # 4. Any other improvement you can think of (extra point)
 
 print("===" * 24)
-print("welcome to bankPHP, the coded bank")
+print("welcome to bankPHP, the coded bank\n")
 
 def validate_userdetails(name, email, password):
     #logic to validate user details 
     if (re.search(r"^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$", email) and re.search(r"^[a-zA-Z]+(?:\s[a-zA-Z]+)+$", name) and re.search(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$", password)):
-        print("Valid details")
+        print("Valid details\n")
         return
     else:
-        print("Enter valid details")
+        print("Enter valid details\n")
         register()
         
         
@@ -61,7 +61,7 @@ def update_account(user):
 def bank_operation(user):
     name = user[current_user_acct]['name']
     balance = float(user[current_user_acct]['account_balance'])
-    print(f'Welcome to bankPHP, {name}')
+    print(f'Welcome to bankPHP, {name}\n')
     print('What would you like to do?')
     print('1. Withdrawal')
     print('2. Cash Deposit')
@@ -82,26 +82,26 @@ def bank_operation(user):
         deposit_amount = float(input('How much will you like to deposit \n'))
         user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
         bal = user[current_user_acct]['account_balance']
-        print(f'Your new account balance is {bal}')
+        print(f'Your new account balance is {bal}\n')
         update_account(user)
     elif (selected_Option == 3):
         complaint = input('What will you like to report\n')
-        print('Thank you for contacting us')
+        print('Thank you for contacting us\n')
         user[current_user_acct]['complaints'].append(complaint)
         update_account(user)
     else:
-        print(f'Invalid option selected')
+        print(f'Invalid option selected\n')
 
 def login():
     while True:   
         account_number = input("What is your account number? \n")
         password = input("Your password? \n")
         if  auth(account_number, password):
-            print("login successful")
+            print("login successful\n")
             bank_operation(current_user)
             break
         else:
-            print("Wrong Account Number or Password. Please try again")
+            print("Wrong Account Number or Password. Please try again\n")
             login()
 
 def register():
@@ -140,12 +140,13 @@ while True:
     status = int(input("Enter 1 for Login or 2 for Register\n"))
     if status == 1:
         login()
+        print("Thank you for banking with us, do have a nice day")
         break
     elif status == 2:
         register()
         break
     else:
-        print("Select a valid option")
+        print("Select a valid option\n")
         
 
 
