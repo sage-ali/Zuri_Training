@@ -70,6 +70,7 @@ def register():
         "name": name,
         "email": email,
         "password": password
+        "account_balance": 0
     }
     }
     #logic to check and update db
