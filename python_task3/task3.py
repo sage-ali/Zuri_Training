@@ -13,6 +13,8 @@ print ("Today's date:  = %s/%s/%s" % (e.day, e.month, e.year))
 print ("The time is now: = %s:%s" % (e.hour, e.minute))
 
 current_user = {}
+current_user_acct = ''
+current_user_index = 0
 
 # 4. Any other improvement you can think of (extra point)
 
@@ -38,11 +40,57 @@ def auth(account_number, password):
         for user in user_datas:
             if user.get(account_number, False) and user[account_number]['password'] == password:
                 current_user.update(user)
+                global current_user_acct 
+                current_user_acct = str(account_number)
+                global current_user_index
+                current_user_index = user_datas.index(user)
                 return True
     return False
 
+def update_account(user):
+    with open(db_path) as fi:
+        user_datas = json.load(fi)
+        user_datas[current_user_index] = user
+    
+    with open(db_path, mode='w') as f:
+        f.write(json.dumps(user_datas, indent=4))
+
+    
+    
+    
 def bank_operation(user):
-    pass
+    name = user[current_user_acct]['name']
+    balance = float(user[current_user_acct]['account_balance'])
+    print(f'Welcome to bankPHP, {name}')
+    print('What would you like to do?')
+    print('1. Withdrawal')
+    print('2. Cash Deposit')
+    print('3. Complaints')
+    
+    selected_Option = int(input('Please select an option \n'))
+    if (selected_Option == 1):
+        
+        withdraw_amount = float(input('How much will you like to withdraw \n'))
+        if withdraw_amount <= balance:
+            print(f'Take your cash: {withdraw_amount}')
+            user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
+            update_account(user)
+        else:
+            print('Insufficient funds')   
+        
+    elif (selected_Option == 2):
+        deposit_amount = float(input('How much will you like to deposit \n'))
+        user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
+        bal = user[current_user_acct]['account_balance']
+        print(f'Your new account balance is {bal}')
+        update_account(user)
+    elif (selected_Option == 3):
+        complaint = input('What will you like to report\n')
+        print('Thank you for contacting us')
+        user[current_user_acct]['complaints'].append(complaint)
+        update_account(user)
+    else:
+        print(f'Invalid option selected')
 
 def login():
     while True:   
@@ -69,8 +117,9 @@ def register():
     str(accountNumber) : {
         "name": name,
         "email": email,
-        "password": password
-        "account_balance": 0
+        "password": password,
+        "account_balance": 0,
+        "complaints": []
     }
     }
     #logic to check and update db
@@ -82,9 +131,7 @@ def register():
     with open(db_path, mode='w') as f:
         f.write(json.dumps(user_datas, indent=4))
         
-    
-    
-    #login()
+    login()
     
 
 
