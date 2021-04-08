@@ -41,8 +41,8 @@ def auth(account_number, password):
                 return True
     return False
 
-# def bank_operation():
-#     pass
+def bank_operation(user):
+    pass
 
 def login():
     while True:   
@@ -50,7 +50,7 @@ def login():
         password = input("Your password? \n")
         if  auth(account_number, password):
             print("login successful")
-            bank_operation()
+            bank_operation(current_user)
             break
         else:
             print("Wrong Account Number or Password. Please try again")
