@@ -9,5 +9,14 @@
                 "I was wrongfully debited on tuesday, will you kindly reverse the transaction"
             ]
         }
+    },
+    {
+        "2057707906": {
+            "name": "Solo Makinde",
+            "email": "solo_makinde@gmail.com",
+            "password": "Solomakinde!1",
+            "account_balance": 0,
+            "complaints": []
+        }
     }
 ]

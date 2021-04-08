@@ -112,7 +112,7 @@ def register():
     validate_userdetails(name, email, password)
     
     accountNumber = generate_account_number()
-    
+    print(f"Your account number is {accountNumber}. Copy it down\n")
     user_details = {
     str(accountNumber) : {
         "name": name,
