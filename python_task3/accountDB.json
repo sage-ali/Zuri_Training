@@ -1,0 +1,13 @@
+[
+    {
+        "3950250417": {
+            "name": "Ali Agboola",
+            "email": "ali@gmail.com",
+            "password": "Suruat@2",
+            "account_balance": "1500.0",
+            "complaints": [
+                "I was wrongfully debited on tuesday, will you kindly reverse the transaction"
+            ]
+        }
+    }
+]
