@@ -140,7 +140,6 @@ while True:
     status = int(input("Enter 1 for Login or 2 for Register\n"))
     if status == 1:
         login()
-        print("Thank you for banking with us, do have a nice day")
         break
     elif status == 2:
         register()
@@ -148,7 +147,13 @@ while True:
     else:
         print("Select a valid option\n")
         
-
+while True:
+    logout = input('will you like to perform another transaction. 1 for Yes, 2 for No\n')
+    if logout == 1:
+        login()     
+    elif logout == 2:
+        print("Thank you for banking with us, do have a nice day")
+        break
 
 
 
