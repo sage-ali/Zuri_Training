@@ -38,13 +38,25 @@ def validate_userdetails(name, email, password):
 def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
-  
-# def login():
-#     # name = input("What is your name? \n")
-#     # password = input("Your password? \n")
-#     # bank_operation()
-#     pass
-  
+def auth(account_number, password):
+    with open(db_path) as fi:
+        user_datas = json.load(fi)
+        for user in user_datas:
+            if user.get(account_number, False) and user[account_number]['password'] == password:
+                return True
+    return False
+
+def login():
+    while True:   
+        account_number = input("What is your account number? \n")
+        password = input("Your password? \n")
+        if  auth(account_number, password):
+            print("login successful")
+            bank_operation()
+            break
+        else:
+            print("Wrong Account Number or Password. Please try again")
+            login()
 
 def register():
     #checking if new user or existing user
@@ -81,7 +93,7 @@ while True:
     #checking if new user or existing user
     status = int(input("Enter 1 for Login or 2 for Register\n"))
     if status == 1:
-        #login()
+        login()
         break
     elif status == 2:
         register()
@@ -90,9 +102,6 @@ while True:
         print("Select a valid option")
         
 
-
-# def auth():
-#     pass
 
 
 
