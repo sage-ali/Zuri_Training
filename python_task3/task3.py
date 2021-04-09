@@ -67,8 +67,9 @@ def bank_operation(user):
     print('2. Cash Deposit')
     print('3. Complaints')
     
+    selected_Option = int(input('Please select an option \n'))
     while True:
-        selected_Option = int(input('Please select an option \n'))
+        
         if (selected_Option == 1):
             
             withdraw_amount = float(input('How much will you like to withdraw \n'))
@@ -77,10 +78,11 @@ def bank_operation(user):
                 user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
                 update_account(user)
                 logout()
+                break
             else:
                 print('Insufficient funds')
                 logout()   
-                
+                break
         elif (selected_Option == 2):
             deposit_amount = float(input('How much will you like to deposit \n'))
             user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
@@ -88,14 +90,17 @@ def bank_operation(user):
             print(f'Your new account balance is {bal}\n')
             update_account(user)
             logout()
+            break
         elif (selected_Option == 3):
             complaint = input('What will you like to report\n')
             print('Thank you for contacting us\n')
             user[current_user_acct]['complaints'].append(complaint)
             update_account(user)
             logout()
+            break
         else:
             print(f'Invalid option selected\n')
+            print(f'Select a valid option\n')
         
 
 def login():
