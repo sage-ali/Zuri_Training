@@ -67,34 +67,35 @@ def bank_operation(user):
     print('2. Cash Deposit')
     print('3. Complaints')
     
-    selected_Option = int(input('Please select an option \n'))
-    if (selected_Option == 1):
-        
-        withdraw_amount = float(input('How much will you like to withdraw \n'))
-        if withdraw_amount <= balance:
-            print(f'Take your cash: {withdraw_amount}')
-            user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
+    while True:
+        selected_Option = int(input('Please select an option \n'))
+        if (selected_Option == 1):
+            
+            withdraw_amount = float(input('How much will you like to withdraw \n'))
+            if withdraw_amount <= balance:
+                print(f'Take your cash: {withdraw_amount}')
+                user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
+                update_account(user)
+                logout()
+            else:
+                print('Insufficient funds')
+                logout()   
+                
+        elif (selected_Option == 2):
+            deposit_amount = float(input('How much will you like to deposit \n'))
+            user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
+            bal = user[current_user_acct]['account_balance']
+            print(f'Your new account balance is {bal}\n')
+            update_account(user)
+            logout()
+        elif (selected_Option == 3):
+            complaint = input('What will you like to report\n')
+            print('Thank you for contacting us\n')
+            user[current_user_acct]['complaints'].append(complaint)
             update_account(user)
             logout()
         else:
-            print('Insufficient funds')
-            logout()   
-            
-    elif (selected_Option == 2):
-        deposit_amount = float(input('How much will you like to deposit \n'))
-        user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
-        bal = user[current_user_acct]['account_balance']
-        print(f'Your new account balance is {bal}\n')
-        update_account(user)
-        logout()
-    elif (selected_Option == 3):
-        complaint = input('What will you like to report\n')
-        print('Thank you for contacting us\n')
-        user[current_user_acct]['complaints'].append(complaint)
-        update_account(user)
-        logout()
-    else:
-        print(f'Invalid option selected\n')
+            print(f'Invalid option selected\n')
         
 
 def login():
