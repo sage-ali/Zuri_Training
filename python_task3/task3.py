@@ -75,22 +75,27 @@ def bank_operation(user):
             print(f'Take your cash: {withdraw_amount}')
             user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
             update_account(user)
+            logout()
         else:
-            print('Insufficient funds')   
-        
+            print('Insufficient funds')
+            logout()   
+            
     elif (selected_Option == 2):
         deposit_amount = float(input('How much will you like to deposit \n'))
         user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
         bal = user[current_user_acct]['account_balance']
         print(f'Your new account balance is {bal}\n')
         update_account(user)
+        logout()
     elif (selected_Option == 3):
         complaint = input('What will you like to report\n')
         print('Thank you for contacting us\n')
         user[current_user_acct]['complaints'].append(complaint)
         update_account(user)
+        logout()
     else:
         print(f'Invalid option selected\n')
+        
 
 def login():
     while True:   
@@ -134,7 +139,16 @@ def register():
         
     login()
     
-
+def logout():
+    while True:
+        logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
+        if logout == 1:
+            login()     
+        elif logout == 2:
+            print("Thank you for banking with us, do have a nice day")
+            break
+        else:
+            print("Enter a valid number")
 
 while True:
     #checking if new user or existing user
@@ -148,15 +162,7 @@ while True:
     else:
         print("Select a valid option\n")
         
-while True:
-    logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
-    if logout == 1:
-        login()     
-    elif logout == 2:
-        print("Thank you for banking with us, do have a nice day")
-        break
-    else:
-        print("Enter a valid number")
+
 
 
 
