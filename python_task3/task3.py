@@ -101,6 +101,8 @@ def bank_operation(user):
         else:
             print(f'Invalid option selected\n')
             print(f'Select a valid option\n')
+            bank_operation(user)
+            break
         
 
 def login():
@@ -115,6 +117,7 @@ def login():
         else:
             print("Wrong Account Number or Password. Please try again\n")
             login()
+            
 
 def register():
     #checking if new user or existing user
@@ -124,7 +127,7 @@ def register():
     validate_userdetails(name, email, password)
     
     accountNumber = generate_account_number()
-    print(f"Your account number is {accountNumber}. Copy it down\n")
+    print(f"Your account number is {accountNumber}. Write it down\n")
     user_details = {
     str(accountNumber) : {
         "name": name,
@@ -149,7 +152,8 @@ def logout():
     while True:
         logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
         if logout == 1:
-            login()     
+            login()
+            break     
         elif logout == 2:
             print("Thank you for banking with us, do have a nice day")
             break
