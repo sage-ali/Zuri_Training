@@ -29,7 +29,7 @@ class Budget:
     def check_balance(self):
         return f"The current balance of the {self.category} category is {self.amount}\n"
 
-   
+
 
 #Tests
 #----------------------------------------------------------------
