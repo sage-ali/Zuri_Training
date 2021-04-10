@@ -5,12 +5,12 @@ class Budget:
         self.amount = 0
     
     def withdraw(self, amount):
-        if amount <= self.amount:
+        if amount <= self.amount and amount > 0:
             self.amount -= amount
             print(f"You've withdrawn {amount} from the {self.category} category")
             print(self.check_balance())
         else:
-            print(f"Insufficient balance in {self.category} category\n")    
+            print(f"Insufficient balance in {self.category} category(or you tried to withdraw 0)\n")    
             
     def deposit(self, amount):
         self.amount += amount
@@ -18,17 +18,18 @@ class Budget:
         print(self.check_balance())
         
     def transfer(self, destination, amount):
-        if amount <= self.amount:
+        if amount <= self.amount and amount > 0:
             self.amount -= amount
             destination.amount += amount
             print(f"You've successfully transferred {amount} from the {self.category} category to {destination.category} category")
             print(f"The current balance of the {self.category} category is {self.amount} while that of {destination.category} is {destination.amount}\n")
         else:
-            print(f"Insufficient balance in {self.category} category, can not complete transfer\n")
+            print(f"Insufficient balance in {self.category} category, can not complete transfer(or you tried to transfer 0)\n")
     
     def check_balance(self):
         return f"The current balance of the {self.category} category is {self.amount}\n"
-    
+
+   
 
 #Tests
 #----------------------------------------------------------------
@@ -44,6 +45,8 @@ class Budget:
 # clothings_budget.deposit(250)
 # entertainment_budget.transfer(food_budget, 200)
 # print(entertainment_budget.check_balance())
+
+#clothings_budget.withdraw(0)
 
 #Results
 #----------------------------------------------------------------
@@ -73,3 +76,5 @@ class Budget:
 # Insufficient balance in clothings category
 
 # Insufficient balance in entertainment category, can not complete transfer
+
+#Insufficient balance in clothings category(or you tried to withdraw 0)
