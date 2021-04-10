@@ -21,7 +21,7 @@ class Budget:
         if amount <= self.amount:
             self.amount -= amount
             destination.amount += amount
-            print(f"You've successfully transfered {amount} from the {self.category} category to {destination.category} category")
+            print(f"You've successfully transferred {amount} from the {self.category} category to {destination.category} category")
             print(f"{self.check_balance()} while that of {destination.category} is {destination.amount}")
         else:
             print(f"Insufficient balance in {self.category} category, can not complete transfer")
