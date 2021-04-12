@@ -55,12 +55,36 @@ def update_account(user):
     with open(db_path, mode='w') as f:
         f.write(json.dumps(user_datas, indent=4))
 
+def withdraw(user):
+    balance = float(user[current_user_acct]['account_balance'])
+    withdraw_amount = float(input('How much will you like to withdraw \n'))
+    if withdraw_amount <= balance:
+        print(f'Take your cash: {withdraw_amount}')
+        user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
+        update_account(user)
+        logout()
+    else:
+        print('Insufficient funds')
+        logout()
+                
+def deposit(user):
+    balance = float(user[current_user_acct]['account_balance'])
+    deposit_amount = float(input('How much will you like to deposit \n'))
+    user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
+    bal = user[current_user_acct]['account_balance']
+    print(f'Your new account balance is {bal}\n')
+    update_account(user)
+    logout()
     
-    
+def complain(user):
+    complaint = input('What will you like to report\n')
+    print('Thank you for contacting us\n')
+    user[current_user_acct]['complaints'].append(complaint)
+    update_account(user)
+    logout()
     
 def bank_operation(user):
     name = user[current_user_acct]['name']
-    balance = float(user[current_user_acct]['account_balance'])
     print(f'Welcome to bankPHP, {name}\n')
     print('What would you like to do?')
     print('1. Withdrawal')
@@ -71,32 +95,13 @@ def bank_operation(user):
     while True:
         
         if (selected_Option == 1):
-            
-            withdraw_amount = float(input('How much will you like to withdraw \n'))
-            if withdraw_amount <= balance:
-                print(f'Take your cash: {withdraw_amount}')
-                user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
-                update_account(user)
-                logout()
-                break
-            else:
-                print('Insufficient funds')
-                logout()   
-                break
+            withdraw(user)
+            break
         elif (selected_Option == 2):
-            deposit_amount = float(input('How much will you like to deposit \n'))
-            user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
-            bal = user[current_user_acct]['account_balance']
-            print(f'Your new account balance is {bal}\n')
-            update_account(user)
-            logout()
+            deposit(user)
             break
         elif (selected_Option == 3):
-            complaint = input('What will you like to report\n')
-            print('Thank you for contacting us\n')
-            user[current_user_acct]['complaints'].append(complaint)
-            update_account(user)
-            logout()
+            complain(user)
             break
         else:
             print(f'Invalid option selected\n')
