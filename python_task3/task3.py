@@ -34,7 +34,8 @@ def validate_userdetails(name, email, password):
 def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
-def auth(account_number, password):
+def validate_login_details(account_number, password):
+    #validating user information for login purposes
     with open(db_path) as fi:
         user_datas = json.load(fi)
         for user in user_datas:
@@ -55,48 +56,54 @@ def update_account(user):
     with open(db_path, mode='w') as f:
         f.write(json.dumps(user_datas, indent=4))
 
+def withdraw(user):
+    balance = float(user[current_user_acct]['account_balance'])
+    withdraw_amount = float(input('How much will you like to withdraw: '))
+    if withdraw_amount <= balance:
+        print(f'Take your cash: {withdraw_amount}')
+        user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
+        update_account(user)
+        logout()
+    else:
+        print('Insufficient funds')
+        logout()
+                
+def deposit(user):
+    balance = float(user[current_user_acct]['account_balance'])
+    deposit_amount = float(input('How much will you like to deposit: '))
+    user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
+    bal = user[current_user_acct]['account_balance']
+    print(f'Your new account balance is {bal}\n')
+    update_account(user)
+    logout()
     
-    
+def complain(user):
+    complaint = input('What will you like to report?\n')
+    print('Thank you for contacting us\n')
+    user[current_user_acct]['complaints'].append(complaint)
+    update_account(user)
+    logout()
     
 def bank_operation(user):
+    #Getting user name from the cache
     name = user[current_user_acct]['name']
-    balance = float(user[current_user_acct]['account_balance'])
     print(f'Welcome to bankPHP, {name}\n')
     print('What would you like to do?')
     print('1. Withdrawal')
     print('2. Cash Deposit')
     print('3. Complaints')
     
-    selected_Option = int(input('Please select an option \n'))
+    selected_Option = int(input('Please select an option: '))
     while True:
-        
+        #Looping to ensure user enters a valid input
         if (selected_Option == 1):
-            
-            withdraw_amount = float(input('How much will you like to withdraw \n'))
-            if withdraw_amount <= balance:
-                print(f'Take your cash: {withdraw_amount}')
-                user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
-                update_account(user)
-                logout()
-                break
-            else:
-                print('Insufficient funds')
-                logout()   
-                break
+            withdraw(user)
+            break
         elif (selected_Option == 2):
-            deposit_amount = float(input('How much will you like to deposit \n'))
-            user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
-            bal = user[current_user_acct]['account_balance']
-            print(f'Your new account balance is {bal}\n')
-            update_account(user)
-            logout()
+            deposit(user)
             break
         elif (selected_Option == 3):
-            complaint = input('What will you like to report\n')
-            print('Thank you for contacting us\n')
-            user[current_user_acct]['complaints'].append(complaint)
-            update_account(user)
-            logout()
+            complain(user)
             break
         else:
             print(f'Invalid option selected\n')
@@ -108,9 +115,10 @@ def bank_operation(user):
 def login():
     while True:   
         print(f"Logging in...")
-        account_number = input("What is your account number? \n")
-        password = input("Your password? \n")
-        if  auth(account_number, password):
+        #Asking for user details to check database for login
+        account_number = input("What is your account number: ")
+        password = input("Your password: ")
+        if  validate_login_details(account_number, password):
             print("login successful\n")
             bank_operation(current_user)
             break
@@ -120,10 +128,10 @@ def login():
             
 
 def register():
-    #checking if new user or existing user
-    name = input("What is your fullname? \n")
-    email = input("What is your email? \n")
-    password = input("Your password? \n")
+    #taking user details
+    name = input("What is your fullname: ")
+    email = input("What is your email: ")
+    password = input("Your password? \npassword must be at least 8 characters long, contain uppercase and lowercase, special character and a number\n")
     validate_userdetails(name, email, password)
     
     accountNumber = generate_account_number()
@@ -137,7 +145,7 @@ def register():
         "complaints": []
     }
     }
-    #logic to check and update db
+    #uploading the document to the database
     
     with open(db_path) as fi:
         user_datas = json.load(fi)
@@ -150,7 +158,8 @@ def register():
     
 def logout():
     while True:
-        logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
+        #checking if user wants to log out or perform another operation
+        logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No: '))
         if logout == 1:
             login()
             break     
@@ -159,19 +168,20 @@ def logout():
             break
         else:
             print("Enter a valid number")
-
-while True:
-    #checking if new user or existing user
-    status = int(input("Enter 1 for Login or 2 for Register\n"))
-    if status == 1:
-        login()
-        break
-    elif status == 2:
-        register()
-        break
-    else:
-        print("Select a valid option\n")
-        
+def init():
+    while True:
+        #checking if new user or existing user
+        status = int(input("Enter 1 for Login or 2 for Register: "))
+        if status == 1:
+            login()
+            break
+        elif status == 2:
+            register()
+            break
+        else:
+            print("Select a valid option\n")
+            
+init()       
 
 
 
