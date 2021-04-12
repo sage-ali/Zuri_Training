@@ -58,7 +58,7 @@ def update_account(user):
 
 def withdraw(user):
     balance = float(user[current_user_acct]['account_balance'])
-    withdraw_amount = float(input('How much will you like to withdraw \n'))
+    withdraw_amount = float(input('How much will you like to withdraw: '))
     if withdraw_amount <= balance:
         print(f'Take your cash: {withdraw_amount}')
         user[current_user_acct]['account_balance'] = str(balance - withdraw_amount)
@@ -70,7 +70,7 @@ def withdraw(user):
                 
 def deposit(user):
     balance = float(user[current_user_acct]['account_balance'])
-    deposit_amount = float(input('How much will you like to deposit \n'))
+    deposit_amount = float(input('How much will you like to deposit: '))
     user[current_user_acct]['account_balance'] = str(balance + deposit_amount)
     bal = user[current_user_acct]['account_balance']
     print(f'Your new account balance is {bal}\n')
@@ -78,7 +78,7 @@ def deposit(user):
     logout()
     
 def complain(user):
-    complaint = input('What will you like to report\n')
+    complaint = input('What will you like to report?\n')
     print('Thank you for contacting us\n')
     user[current_user_acct]['complaints'].append(complaint)
     update_account(user)
@@ -93,7 +93,7 @@ def bank_operation(user):
     print('2. Cash Deposit')
     print('3. Complaints')
     
-    selected_Option = int(input('Please select an option \n'))
+    selected_Option = int(input('Please select an option: '))
     while True:
         #Looping to ensure user enters a valid input
         if (selected_Option == 1):
@@ -116,8 +116,8 @@ def login():
     while True:   
         print(f"Logging in...")
         #Asking for user details to check database for login
-        account_number = input("What is your account number? \n")
-        password = input("Your password? \n")
+        account_number = input("What is your account number: ")
+        password = input("Your password: ")
         if  auth(account_number, password):
             print("login successful\n")
             bank_operation(current_user)
@@ -129,9 +129,9 @@ def login():
 
 def register():
     #taking user details
-    name = input("What is your fullname? \n")
-    email = input("What is your email? \n")
-    password = input("Your password? \npassword must be at least 8 characters long, contain uppercase and lowercase, special character and a number")
+    name = input("What is your fullname: ")
+    email = input("What is your email: ")
+    password = input("Your password? \npassword must be at least 8 characters long, contain uppercase and lowercase, special character and a number\n")
     validate_userdetails(name, email, password)
     
     accountNumber = generate_account_number()
@@ -159,7 +159,7 @@ def register():
 def logout():
     while True:
         #checking if user wants to log out or perform another operation
-        logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
+        logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No: '))
         if logout == 1:
             login()
             break     
@@ -171,7 +171,7 @@ def logout():
 def init():
     while True:
         #checking if new user or existing user
-        status = int(input("Enter 1 for Login or 2 for Register\n"))
+        status = int(input("Enter 1 for Login or 2 for Register: "))
         if status == 1:
             login()
             break
