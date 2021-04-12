@@ -34,7 +34,7 @@ def validate_userdetails(name, email, password):
 def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
-def auth(account_number, password):
+def validate_login_details(account_number, password):
     #authenticating user information for login purposes
     with open(db_path) as fi:
         user_datas = json.load(fi)
@@ -118,7 +118,7 @@ def login():
         #Asking for user details to check database for login
         account_number = input("What is your account number: ")
         password = input("Your password: ")
-        if  auth(account_number, password):
+        if  validate_login_details(account_number, password):
             print("login successful\n")
             bank_operation(current_user)
             break
