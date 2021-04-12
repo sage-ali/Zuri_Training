@@ -35,6 +35,7 @@ def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
 def auth(account_number, password):
+    #authenticating user information for login purposes
     with open(db_path) as fi:
         user_datas = json.load(fi)
         for user in user_datas:
@@ -84,6 +85,7 @@ def complain(user):
     logout()
     
 def bank_operation(user):
+    #Getting user name from the cache
     name = user[current_user_acct]['name']
     print(f'Welcome to bankPHP, {name}\n')
     print('What would you like to do?')
@@ -93,7 +95,7 @@ def bank_operation(user):
     
     selected_Option = int(input('Please select an option \n'))
     while True:
-        
+        #Looping to ensure user enters a valid input
         if (selected_Option == 1):
             withdraw(user)
             break
@@ -113,6 +115,7 @@ def bank_operation(user):
 def login():
     while True:   
         print(f"Logging in...")
+        #Asking for user details to check database for login
         account_number = input("What is your account number? \n")
         password = input("Your password? \n")
         if  auth(account_number, password):
@@ -125,10 +128,10 @@ def login():
             
 
 def register():
-    #checking if new user or existing user
+    #taking user details
     name = input("What is your fullname? \n")
     email = input("What is your email? \n")
-    password = input("Your password? \n")
+    password = input("Your password? \npassword must be at least 8 characters long, contain uppercase and lowercase, special character and a number")
     validate_userdetails(name, email, password)
     
     accountNumber = generate_account_number()
@@ -142,7 +145,7 @@ def register():
         "complaints": []
     }
     }
-    #logic to check and update db
+    #uploading the document to the database
     
     with open(db_path) as fi:
         user_datas = json.load(fi)
@@ -155,6 +158,7 @@ def register():
     
 def logout():
     while True:
+        #checking if user wants to log out or perform another operation
         logout = int(input('will you like to perform another transaction. 1 for Yes, 2 for No\n'))
         if logout == 1:
             login()
