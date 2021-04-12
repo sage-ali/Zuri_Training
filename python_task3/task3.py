@@ -164,19 +164,20 @@ def logout():
             break
         else:
             print("Enter a valid number")
-
-while True:
-    #checking if new user or existing user
-    status = int(input("Enter 1 for Login or 2 for Register\n"))
-    if status == 1:
-        login()
-        break
-    elif status == 2:
-        register()
-        break
-    else:
-        print("Select a valid option\n")
-        
+def init():
+    while True:
+        #checking if new user or existing user
+        status = int(input("Enter 1 for Login or 2 for Register\n"))
+        if status == 1:
+            login()
+            break
+        elif status == 2:
+            register()
+            break
+        else:
+            print("Select a valid option\n")
+            
+init()       
 
 
 
