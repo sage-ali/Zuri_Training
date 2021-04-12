@@ -35,7 +35,7 @@ def generate_account_number():
     return random.randrange(1111111111,9999999999)
 
 def validate_login_details(account_number, password):
-    #authenticating user information for login purposes
+    #validating user information for login purposes
     with open(db_path) as fi:
         user_datas = json.load(fi)
         for user in user_datas:
