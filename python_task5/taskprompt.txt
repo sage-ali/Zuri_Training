@@ -8,3 +8,5 @@ Following the Introduction to Django Session, Downlaod and install python on you
 Create a repo for it on Github and push the project there.
 
 Submit the url to your github repo 
+
+submitted: https://github.com/sage-ali/First-django-app
